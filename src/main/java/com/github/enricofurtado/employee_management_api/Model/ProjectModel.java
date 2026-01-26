@@ -34,6 +34,7 @@ public class ProjectModel {
 
     @Column(name = "employees")
     @JsonIgnore
+    @OneToMany(mappedBy = "project")
     private List<EmployeeModel> employee;
 
     public Long getId() {

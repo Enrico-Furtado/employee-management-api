@@ -32,12 +32,15 @@ public class EmployeeModel {
     private String phone;
 
     @Column(name = "employment_type")
+    @Enumerated(EnumType.STRING)
     private EmploymentType employmentType;
 
     @Column(name = "job_title")
+    @Enumerated(EnumType.STRING)
     private JobTitle jobTitle;
 
     @Column(name = "department")
+    @Enumerated(EnumType.STRING)
     private Department department;
 
     @Column(name = "salary")
@@ -47,7 +50,7 @@ public class EmployeeModel {
     private LocalDate admissionDate;
 
     @Column(name = "is_active")
-    private Boolean isActive;
+    private Boolean Active;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -127,11 +130,11 @@ public class EmployeeModel {
     }
 
     public Boolean getActive() {
-        return isActive;
+        return Active;
     }
 
     public void setActive(Boolean active) {
-        isActive = active;
+        Active = active;
     }
 
     public ProjectModel getProject() {
