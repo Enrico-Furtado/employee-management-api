@@ -2,10 +2,12 @@ package com.github.enricofurtado.employee_management_api.Service;
 
 import com.github.enricofurtado.employee_management_api.Model.EmployeeModel;
 import com.github.enricofurtado.employee_management_api.Repository.EmployeeRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class EmployeeService {
 
     private EmployeeRepository employeeRepository;

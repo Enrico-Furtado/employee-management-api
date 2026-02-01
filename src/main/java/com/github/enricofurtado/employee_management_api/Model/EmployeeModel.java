@@ -1,6 +1,7 @@
 package com.github.enricofurtado.employee_management_api.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.enricofurtado.employee_management_api.Enums.Department;
 import com.github.enricofurtado.employee_management_api.Enums.EmploymentType;
 import com.github.enricofurtado.employee_management_api.Enums.JobTitle;
@@ -49,11 +50,12 @@ public class EmployeeModel {
     @Column(name = "admission_date")
     private LocalDate admissionDate;
 
+    @JsonProperty("is_active")
     @Column(name = "is_active")
-    private Boolean Active;
+    private Boolean active;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "project_id")
     private ProjectModel project;
 
@@ -130,11 +132,11 @@ public class EmployeeModel {
     }
 
     public Boolean getActive() {
-        return Active;
+        return active;
     }
 
     public void setActive(Boolean active) {
-        Active = active;
+        this.active = active;
     }
 
     public ProjectModel getProject() {

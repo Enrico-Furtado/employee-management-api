@@ -1,35 +1,50 @@
 package com.github.enricofurtado.employee_management_api.Controller;
 
 
+import com.github.enricofurtado.employee_management_api.Model.EmployeeModel;
+import com.github.enricofurtado.employee_management_api.Service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
 
+    private EmployeeService employeeService;
+
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
 
     @PostMapping("/create")
-    public String employeeCreate(){
-        return "Employee created";
+    public EmployeeModel employeeCreate(@RequestBody EmployeeModel employeeModel){
+        EmployeeModel employee = employeeService.createEmployee(employeeModel);
+        return employee;
     }
 
     @GetMapping("/list")
-    public String employeeList() {
-        return "list";
+    public List<EmployeeModel> employeeList() {
+        List<EmployeeModel> employees = employeeService.getAllEmployees();
+        return employees;
     }
 
     @GetMapping("/list/{id}")
-    public String employeeList(@PathVariable String id){
-        return "list";
+    public EmployeeModel employeeList(@PathVariable Long id){
+        EmployeeModel employee = employeeService.employeeById(id);
+        return employee;
     }
 
-    @PutMapping
-    public String employeeUpdate(){
-        return "Employee updated";
+    @PutMapping("/update/{id}")
+    public EmployeeModel employeeUpdate(@PathVariable Long id, @RequestBody EmployeeModel employeeModel){
+        EmployeeModel employee = employeeService.updateEmployee(id, employeeModel);
+        return employee;
     }
 
-    @DeleteMapping
-    public String employeeDelete(@RequestParam String id){
+    @DeleteMapping("/delete/{id}")
+    public String employeeDelete(@PathVariable Long id){
+        employeeService.deleteEmployee(id);
         return "Employee deleted";
     }
 }
