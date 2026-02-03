@@ -1,6 +1,7 @@
 package com.github.enricofurtado.employee_management_api.Controller;
 
 
+import com.github.enricofurtado.employee_management_api.DTO.EmployeeDTO;
 import com.github.enricofurtado.employee_management_api.Model.EmployeeModel;
 import com.github.enricofurtado.employee_management_api.Service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
@@ -19,26 +20,25 @@ public class EmployeeController {
     }
 
     @PostMapping("/create")
-    public EmployeeModel employeeCreate(@RequestBody EmployeeModel employeeModel){
-        EmployeeModel employee = employeeService.createEmployee(employeeModel);
-        return employee;
+    public EmployeeDTO employeeCreate(@RequestBody EmployeeDTO employeeDTO){
+        return employeeService.createEmployee(employeeDTO);
     }
 
     @GetMapping("/list")
-    public List<EmployeeModel> employeeList() {
-        List<EmployeeModel> employees = employeeService.getAllEmployees();
+    public List<EmployeeDTO> employeeList() {
+        List<EmployeeDTO> employees = employeeService.getAllEmployees();
         return employees;
     }
 
     @GetMapping("/list/{id}")
-    public EmployeeModel employeeList(@PathVariable Long id){
-        EmployeeModel employee = employeeService.employeeById(id);
+    public EmployeeDTO employeeListId(@PathVariable Long id){
+        EmployeeDTO employee = employeeService.employeeById(id);
         return employee;
     }
 
     @PutMapping("/update/{id}")
-    public EmployeeModel employeeUpdate(@PathVariable Long id, @RequestBody EmployeeModel employeeModel){
-        EmployeeModel employee = employeeService.updateEmployee(id, employeeModel);
+    public EmployeeDTO employeeUpdate(@PathVariable Long id, @RequestBody EmployeeDTO employeeDTO){
+        EmployeeDTO employee = employeeService.updateEmployee(id, employeeDTO);
         return employee;
     }
 
