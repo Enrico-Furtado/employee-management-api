@@ -33,23 +33,19 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-    //LIST EMPLOYEES
-    public List<EmployeeDTO> getAllEmployees(){
-        List<EmployeeModel> employee = employeeRepository.findAll();
-        List<EmployeeDTO> employees = new ArrayList<>();
-        for(EmployeeModel employeeModel : employee){
-            employees.add(employeeMapper.map(employeeModel));
-        }
-        return employees;
+    // LIST EMPLOYEES
+    public List<EmployeeDTO> getAllEmployees() {
+        return employeeRepository.findAll()
+                .stream()
+                .map(employeeMapper::map)
+                .toList();
     }
 
     //LIST EMPLOYEE BY ID
     public EmployeeDTO employeeById(Long id){
-        Optional<EmployeeModel> employeeById = employeeRepository.findById(id);
-            if (employeeById.isPresent()) {
-                return employeeMapper.map(employeeById.get());
-            }
-            return null;
+        return employeeRepository.findById(id)
+                .map(employeeMapper::map)
+                .orElse(null);
     }
 
     //UPDATE EMPLOYEE BY ID
